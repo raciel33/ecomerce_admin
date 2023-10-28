@@ -2,13 +2,13 @@
 export class Admin{
 
   constructor(
-   public nombre :string,
+   public nombres :string,
     public apellidos :string,
    public email:string,
    public password?:string,
    public telefono?:string,
    public informe?:string,
-   public rol?:'admin' | 'user',//tipos de role
+   public rol?:'admin' | 'cliente',//tipos de role
    public dni?:string,
    public uid?:string,
   ){

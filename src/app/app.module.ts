@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { routing } from './app.routing';
 
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,7 +24,8 @@ import { routing } from './app.routing';
     HttpClientModule,
     ReactiveFormsModule,
     ComponentsModule,
-    routing
+    routing,
+    RouterModule
 
 
 

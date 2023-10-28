@@ -8,6 +8,7 @@ import { tap, map, catchError } from 'rxjs/operators';
 import { LoginForm } from '../interfaces/login-form';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
+declare var iziToast: any;
 
 @Injectable({
   providedIn: 'root'
@@ -38,18 +39,61 @@ get headers(){
 }
 
 //extraemos el role del usuario
-get rol(){
+get rol() {
   return localStorage.getItem( 'rol') || '';
 }
 
   //guardar en localStorage
 
-  guardarLocalStorage( token:string, rol:string ){
+  guardarLocalStorage( token:string , rol: string){
     localStorage.setItem('token' , token);
     localStorage.setItem('rol' , rol );
 
   }
 
+/*----------------------------------------------------------------------*/
+validarToken( allowedRoles: string[]):boolean{
+
+  const token = this.token;
+  const rol = this.rol
+ console.log(rol);
+
+  if (!token ) {
+    return false;
+  }
+  try {
+      //asi podemos validar un token
+       const helper = new JwtHelperService();
+       const decodedToken  = helper.decodeToken( token );
+
+       if(!decodedToken){
+        console.log('token no valido');
+        localStorage.removeItem('token');
+
+         return false;
+        }
+        if (rol != 'admin'){
+          iziToast.show({
+            title:'ERROR',
+            titleColor:'#ff0000',
+            class: 'text-danger',
+            position: 'topRight',
+            message: 'No tienes permisos de administrador'
+          })
+          return false;
+        }
+
+
+      } catch (error) {
+        localStorage.removeItem('token');
+
+         return false;
+     }
+
+
+    return true;
+
+   }
 
 
   constructor( private _http: HttpClient) {
@@ -60,34 +104,12 @@ get rol(){
 
     return this._http.post(`${this.url}/login_admin`,formData).pipe(
       tap(( resp: any)=>{
-        this.user = resp.adminBD
+         this.user = resp.adminBD
+        // console.log(this.user.rol);
         this.guardarLocalStorage(resp.token, resp.adminBD.rol );
       })
     );
    }
 
-   public isAuthenticated( allowedRoles: string []): boolean {
 
-    const token = this.token;
-    const rol = this.rol;
-
-    if (!token) {
-      return false;
-    }
-    try {
-        //asi podemos validar un token
-         const helper = new JwtHelperService();
-         const decodedToken  = helper.decodeToken( token );
-
-         if(!decodedToken){
-          console.log('token no valido');
-          localStorage.removeItem('token')
-           return false;
-          }
-        } catch (error) {
-          localStorage.removeItem('token')
-           return false;
-       }
-      return true;
-   }
 }

@@ -15,22 +15,11 @@ export class AdminGuard implements CanActivate {
 
   }
   canActivate(): any{
-    if ( !this._adminService.isAuthenticated([])) {
+    if ( !this._adminService.validarToken([])) {
       this._router.navigate(['/login'])
       return false;
     }
-    if (this._adminService.user.rol != 'admin') {
-      this._router.navigate(['/login'])
-      iziToast.show({
-        title:'ERROR',
-        titleColor:'#ff0000',
-        class: 'text-danger',
-        position: 'topRight',
-        message: 'No tienes permisos de administrador'
-      })
-      return false;
 
-    }
     return true
   }
 
