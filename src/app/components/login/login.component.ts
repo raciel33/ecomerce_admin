@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AdminService } from 'src/app/services/admin.service';
+import { AdminService } from '../../services/admin.service';
 import Swal from 'sweetalert2';
 
 declare  var jQuery: any;

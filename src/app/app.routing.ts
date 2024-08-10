@@ -7,6 +7,9 @@ import { LoginComponent } from "./components/login/login.component";
 import { IndexClienteComponent } from './components/clientes/index-cliente/index-cliente.component';
 import { CreateClienteComponent } from './components/clientes/create-cliente/create-cliente.component';
 import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cliente.component';
+import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
+import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
+import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 
 
 const appRoute : Routes = [
@@ -14,7 +17,11 @@ const appRoute : Routes = [
  { path: 'panel',children: [
       { path: 'clientes', component: IndexClienteComponent, canActivate: [ AdminGuard ] },
       { path: 'clientes/registro', component: CreateClienteComponent, canActivate: [ AdminGuard ] },
-      { path: 'clientes/:id', component: EditClienteComponent, canActivate: [ AdminGuard ] }
+      { path: 'clientes/:id', component: EditClienteComponent, canActivate: [ AdminGuard ] },
+      { path: 'producto/registro', component: CreateProductoComponent, canActivate: [ AdminGuard ] },
+      { path: 'productos', component: IndexProductoComponent, canActivate: [ AdminGuard ] },
+      { path: 'productos/:id', component: UpdateProductoComponent, canActivate: [ AdminGuard ] },
+
 
  ]},
 

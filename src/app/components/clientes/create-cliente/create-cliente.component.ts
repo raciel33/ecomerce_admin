@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ClienteService } from 'src/app/services/cliente.service';
+import { ClienteService } from '../../../services/cliente.service';
 
 declare var iziToast: any;
 

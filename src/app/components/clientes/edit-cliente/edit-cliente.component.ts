@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Route, Router } from '@angular/router';
-import { ClienteService } from 'src/app/services/cliente.service';
+import { ClienteService } from '../../../services/cliente.service';
 import Swal from 'sweetalert2';
 
 declare var iziToast: any;

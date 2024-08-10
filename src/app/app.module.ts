@@ -10,6 +10,7 @@ import { ComponentsModule } from './components/components.module';
 import { RouterModule } from '@angular/router';
 
 import { routing } from './app.routing';
+import { NgxTinymceModule } from 'ngx-tinymce';
 
 
 
@@ -25,7 +26,13 @@ import { routing } from './app.routing';
     ReactiveFormsModule,
     ComponentsModule,
     routing,
-    RouterModule
+    RouterModule,
+    NgxTinymceModule.forRoot({
+      baseURL: '../../../../assets/tinymce/',
+
+    })
+
+
 
 
 
