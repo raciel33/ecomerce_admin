@@ -31,6 +31,7 @@
                         <button class="form-control btn btn-primary" (click)="filtrar_productos()" type="button">Filtrar</button>
                         <button class="form-control btn btn-info" (click)="reset()" type="button">Reset</button>
 
+
                     </div>
                 </div>
             </div>
@@ -76,6 +77,8 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" [routerLink]="['/panel/productos', item._id]">Editar producto</a></li>
                                         <li><a class="dropdown-item" (click)="borrarProducto( item )">Eliminar producto</a></li>
+                                        <li><a class="dropdown-item" [routerLink]="['/panel/productos/inventario', item._id]">Inventario</a></li>
+
 
                                     </ul>
                                 </div>

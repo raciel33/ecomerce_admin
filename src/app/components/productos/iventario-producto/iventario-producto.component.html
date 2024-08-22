@@ -1,0 +1,106 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Productos</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo lista el inventario de este producto</p>
+        <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" [routerLink]="['/panel/productos']" rel="noopener">Regresar<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
+    </div>
+</div>
+<div class="card box-shadow-sm " *ngIf="producto == undefined ">
+    <div class="card-body">
+        <h1 class="text-center">No se encontró el registro</h1>
+        <div class="row">
+            <div class="col-3 mx-auto">
+                <img src="assets/img/advertencia.png" alt="" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card box-shadow-sm " *ngIf="producto">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Inventario de
+            <span class="fs-3">{{producto.titulo}}</span>
+        </h5>
+    </div>
+
+    <div class="card-body">
+        <div class="row animated fadeIn fast" *ngIf="cargando">
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <!-- Custom size border spinner -->
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-12">
+                    <form #inventarioForm="ngForm" (ngSubmit)="registro_inventario(inventarioForm)" class="form-inline">
+                        <label class="sr-only">Cantidad</label>
+                        <input required class="form-control mb-3 mr-sm-4 " type="text" placeholder="cantidad" name="cantidad" [(ngModel)]="inventarios.cantidad">
+
+                        <label class="sr-only">Proveedor</label>
+                        <input required class="form-control mb-3 mr-sm-4 " type="text" placeholder="proveedor" name="proveedor" [(ngModel)]="inventarios.proveedor">
+
+                        <button class="btn btn-primary mb-3" type="submit">Ingresar</button>
+                    </form>
+                </div>
+
+            </div>
+        </div>
+        <div class="table-responsive" *ngIf="!cargando">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Admin</th>
+                        <th>Cantidad</th>
+                        <th>Proveedor</th>
+                        <th>OP</th>
+                    </tr>
+                </thead>
+
+                <ng-container *ngIf="inventario.length == 0">
+                    <tbody>
+                        <tr>
+                            <td colspan="4" class="text-center">No hay reistro de inventario</td>
+                        </tr>
+                    </tbody>
+
+                </ng-container>
+                <ng-container>
+                    <tbody *ngFor="let item of inventario">
+                        <tr>
+                            <td> {{item.admin.nombres}} {{item.admin.apellidos}}</td>
+                            <td> {{item.cantidad}}</td>
+                            <td> {{item.proveedor}}</td>
+                            <td>
+                                <button (click)="eliminar_inventario_producto(item.producto)" class="btn btn-danger btn-sm">
+                                <i class="cxi-delete"></i>
+                              </button>
+                            </td>
+
+                        </tr>
+                    </tbody>
+                </ng-container>
+
+
+
+            </table>
+        </div>
+
+
+    </div>
+    <div class="card-footer">
+        <!--
+        <div *ngIf="txtTermino.value.length === 0">
+            <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button> &nbsp;
+            <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+        </div>
+      -->
+    </div>
+
+</div>

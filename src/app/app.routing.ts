@@ -10,6 +10,7 @@ import { EditClienteComponent } from './components/clientes/edit-cliente/edit-cl
 import { CreateProductoComponent } from './components/productos/create-producto/create-producto.component';
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
+import { IventarioProductoComponent } from './components/productos/iventario-producto/iventario-producto.component';
 
 
 const appRoute : Routes = [
@@ -21,6 +22,8 @@ const appRoute : Routes = [
       { path: 'producto/registro', component: CreateProductoComponent, canActivate: [ AdminGuard ] },
       { path: 'productos', component: IndexProductoComponent, canActivate: [ AdminGuard ] },
       { path: 'productos/:id', component: UpdateProductoComponent, canActivate: [ AdminGuard ] },
+      { path: 'productos/inventario/:id', component: IventarioProductoComponent, canActivate: [ AdminGuard ] },
+
 
 
  ]},

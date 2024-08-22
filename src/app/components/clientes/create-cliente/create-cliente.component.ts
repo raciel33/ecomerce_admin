@@ -33,7 +33,7 @@ export class CreateClienteComponent {
       this._clientesService.registro_clientes_admin(this.cliente).subscribe(
         resp=>{
               iziToast.success({
-                    title: 'OK',
+                 title: 'OK',
                 message: resp.cliente.nombres + ' registrado'
               })
               this.cargando = false;
@@ -42,7 +42,13 @@ export class CreateClienteComponent {
 
 
       },err =>{
-        console.log('No se ha creado');
+        iziToast.show({
+          title:'ERROR',
+          titleColor:'#ff0000',
+          class: 'text-danger',
+          position: 'topRight',
+          message: err.error.msg
+        })
       })
 
     }else{

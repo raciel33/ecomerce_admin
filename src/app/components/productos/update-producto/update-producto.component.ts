@@ -63,7 +63,6 @@ actualizar(actualizarForm:any){
 
     if(actualizarForm.valid){
 
-      console.log('imagen que se envia' + this.file);
 
       this._productoService.update_producto_admin( this.producto, this.file, ).subscribe(
         resp=>{

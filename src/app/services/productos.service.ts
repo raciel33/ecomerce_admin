@@ -103,6 +103,28 @@ borrar_producto(id: any):Observable<any>{
 
 }
 
+listar_inventario_producto_admin(id: any):Observable<any>{
+
+
+  return this._http.get(`${this.url}/listar_inventario_producto_admin/${id}`, this.headers)
+
 }
 
+
+eliminar_inventario_producto_admin(id: any):Observable<any>{
+
+
+  return this._http.delete(`${this.url}/eliminar_inventario_producto_admin/${id}`, this.headers)
+
+}
+
+registro_inventario(data: any):Observable<any>{
+
+
+  return this._http.post(`${this.url}/registro_inventario`,data, this.headers)
+
+}
+
+
+}
 

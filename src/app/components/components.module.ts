@@ -13,6 +13,7 @@ import { EditClienteComponent } from './clientes/edit-cliente/edit-cliente.compo
 import { CreateProductoComponent } from './productos/create-producto/create-producto.component';
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateProductoComponent } from './productos/update-producto/update-producto.component';
+import { IventarioProductoComponent } from './productos/iventario-producto/iventario-producto.component';
 
 
 
@@ -28,7 +29,8 @@ import { UpdateProductoComponent } from './productos/update-producto/update-prod
    EditClienteComponent,
    CreateProductoComponent,
    IndexProductoComponent,
-   UpdateProductoComponent
+   UpdateProductoComponent,
+   IventarioProductoComponent
 
   ],
   imports: [

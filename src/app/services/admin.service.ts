@@ -45,9 +45,11 @@ get rol() {
 
   //guardar en localStorage
 
-  guardarLocalStorage( token:string , rol: string){
+  guardarLocalStorage( token:string , rol: string, _id:string){
     localStorage.setItem('token' , token);
     localStorage.setItem('rol' , rol );
+    localStorage.setItem('_id' , _id );
+
 
   }
 
@@ -105,8 +107,8 @@ validarToken( allowedRoles: string[]):boolean{
     return this._http.post(`${this.url}/login_admin`,formData).pipe(
       tap(( resp: any)=>{
          this.user = resp.adminBD
-        // console.log(this.user.rol);
-        this.guardarLocalStorage(resp.token, resp.adminBD.rol );
+        console.log(this.user);
+        this.guardarLocalStorage(resp.token, resp.adminBD.rol, resp.adminBD._id );
       })
     );
    }

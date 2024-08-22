@@ -57,7 +57,7 @@ export class CreateProductoComponent {
                   position: 'topRight',
                   message: 'Producto creado'
                 })
-
+                console.log(resp);
                 this.cargando = false;
 
                 this._router.navigate(['/panel/productos'])
