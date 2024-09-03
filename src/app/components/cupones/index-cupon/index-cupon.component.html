@@ -1,0 +1,80 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Cupones</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo lista todos los cupones de la tienda.</p>
+        <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" [routerLink]="['/panel/cupones/registro']" rel="noopener">Registrar nuevo<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
+    </div>
+</div>
+
+<div class="card box-shadow-sm">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Filtro de cupones</h5>
+        <div class="row">
+            <div class="col-6"></div>
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Buscar por código" name="filtro" [(ngModel)]="filtro">
+                <button class="btn btn-primary" type="button" (click)="filtrar_cupones()">Filtrar</button>
+            </div>
+
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row animated fadeIn fast" *ngIf="cargando">
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <!-- Custom size border spinner -->
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive" *ngIf="!cargando">
+            <table class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Código</th>
+                        <th>Tipo</th>
+                        <th>Valor</th>
+                        <th>Límite</th>
+                        <th>Opciones</th>
+
+                    </tr>
+                </thead>
+                <tbody *ngFor="let item of cupones | paginate: { itemsPerPage: 5, currentPage: p }; let i = index ">
+                    <tr>
+                        <td>{{item.codigo}}</td>
+                        <td>{{item.tipo}}</td>
+                        <td>{{item.valor}}</td>
+                        <td>{{item.limite}}</td>
+
+                        <td>
+                            <div class="btn-group dropdown">
+                                <button type="button" class="btn btn-outline-secondary btn-sm dropdown-toggle" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                              Opciones
+                            </button>
+                                <div class="dropdown-menu">
+                                    <a [routerLink]="['/panel/cupones', item._id]" class="dropdown-item">Editar</a>
+                                    <button class="dropdown-item" (click)="borrarCupon( item )">Eliminar</button>
+
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody *ngIf="cupones.length === 0 ">
+                    <tr>
+                        <td class="text-danger">No hay cupones en los registros</td>
+                    </tr>
+                </tbody>
+
+
+            </table>
+        </div>
+    </div>
+    <div class="card-footer">
+
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>

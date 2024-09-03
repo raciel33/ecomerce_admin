@@ -48,7 +48,7 @@
                     </tr>
                 </thead>
 
-                <tbody *ngFor="let item of clientes; let i = index">
+                <tbody *ngFor="let item of clientes | paginate: { itemsPerPage: 5, currentPage: p }; let i = index ">
                     <tr>
                         <td>{{ i + 1 }}</td>
                         <td>{{item.nombres}}</td>
@@ -57,8 +57,8 @@
                         <td>
                             <div class="btn-group dropdown d-inline-block mb-3 mr-2  ">
                                 <button class="btn btn-outline-secondary btn-sm  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                             Opciones
-                            </button>
+                           Opciones
+                          </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" [routerLink]="['/panel/clientes/', item._id]">Editar cliente</a></li>
                                     <li><a class="dropdown-item" (click)="borrarCliente( item )">Eliminar cliente</a></li>
@@ -78,9 +78,13 @@
     </div>
     <div class="card-footer">
 
-        <div *ngIf="txtTermino.value.length === 0">
-            <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button> &nbsp;
-            <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
-        </div>
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+        <!--
+  <div *ngIf="txtTermino.value.length === 0">
+      <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button> &nbsp;
+      <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+  </div>
+      -->
     </div>
 </div>

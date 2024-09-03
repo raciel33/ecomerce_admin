@@ -14,6 +14,11 @@ import { CreateProductoComponent } from './productos/create-producto/create-prod
 import { HttpClientModule } from '@angular/common/http';
 import { UpdateProductoComponent } from './productos/update-producto/update-producto.component';
 import { IventarioProductoComponent } from './productos/iventario-producto/iventario-producto.component';
+import { CreateCuponComponent } from './cupones/create-cupon/create-cupon.component';
+import { IndexCuponComponent } from './cupones/index-cupon/index-cupon.component';
+
+import {NgxPaginationModule} from 'ngx-pagination';
+import { UpdateCuponComponent } from './cupones/update-cupon/update-cupon.component'; // <-- import the module
 
 
 
@@ -30,14 +35,18 @@ import { IventarioProductoComponent } from './productos/iventario-producto/ivent
    CreateProductoComponent,
    IndexProductoComponent,
    UpdateProductoComponent,
-   IventarioProductoComponent
+   IventarioProductoComponent,
+   CreateCuponComponent,
+   IndexCuponComponent,
+   UpdateCuponComponent
 
   ],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,RouterModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxPaginationModule
 
   ],
   exports:[

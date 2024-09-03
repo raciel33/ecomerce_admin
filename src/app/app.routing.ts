@@ -11,18 +11,29 @@ import { CreateProductoComponent } from './components/productos/create-producto/
 import { IndexProductoComponent } from './components/productos/index-producto/index-producto.component';
 import { UpdateProductoComponent } from './components/productos/update-producto/update-producto.component';
 import { IventarioProductoComponent } from './components/productos/iventario-producto/iventario-producto.component';
+import { CreateCuponComponent } from './components/cupones/create-cupon/create-cupon.component';
+import { IndexCuponComponent } from './components/cupones/index-cupon/index-cupon.component';
+import { UpdateCuponComponent } from './components/cupones/update-cupon/update-cupon.component';
 
 
 const appRoute : Routes = [
  { path: 'inicio', component: InicioComponent, canActivate: [ AdminGuard ]},
  { path: 'panel',children: [
+
       { path: 'clientes', component: IndexClienteComponent, canActivate: [ AdminGuard ] },
       { path: 'clientes/registro', component: CreateClienteComponent, canActivate: [ AdminGuard ] },
       { path: 'clientes/:id', component: EditClienteComponent, canActivate: [ AdminGuard ] },
+
       { path: 'producto/registro', component: CreateProductoComponent, canActivate: [ AdminGuard ] },
       { path: 'productos', component: IndexProductoComponent, canActivate: [ AdminGuard ] },
       { path: 'productos/:id', component: UpdateProductoComponent, canActivate: [ AdminGuard ] },
       { path: 'productos/inventario/:id', component: IventarioProductoComponent, canActivate: [ AdminGuard ] },
+
+      { path: 'cupones/registro', component: CreateCuponComponent, canActivate: [ AdminGuard ] },
+      { path: 'cupones', component: IndexCuponComponent, canActivate: [ AdminGuard ] },
+      { path: 'cupones/:id', component: UpdateCuponComponent, canActivate: [ AdminGuard ] },
+
+
 
 
 

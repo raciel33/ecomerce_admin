@@ -12,6 +12,8 @@ import { RouterModule } from '@angular/router';
 import { routing } from './app.routing';
 import { NgxTinymceModule } from 'ngx-tinymce';
 
+import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+
 
 
 
@@ -22,6 +24,7 @@ import { NgxTinymceModule } from 'ngx-tinymce';
   imports: [
     BrowserModule,
     FormsModule,
+    NgxPaginationModule,
     HttpClientModule,
     ReactiveFormsModule,
     ComponentsModule,
@@ -31,10 +34,6 @@ import { NgxTinymceModule } from 'ngx-tinymce';
       baseURL: '../../../../assets/tinymce/',
 
     })
-
-
-
-
 
   ],
   providers: [],

@@ -18,6 +18,7 @@ export class IndexClienteComponent implements OnInit{
   public desde:number = 0;//para la paginacion
   public contador:number = 0;
   public totalClientes:number = 0;
+  p: number = 1;
 
 
   constructor( private _clientesServices: ClienteService){
