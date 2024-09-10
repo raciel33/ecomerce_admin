@@ -1,107 +1,104 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
+import { v4 as uuidv4 } from 'uuid';
 import { GLOBAL } from 'src/app/services/GLOBAL';
-import { ProductosService } from 'src/app/services/productos.service';
 import Swal from 'sweetalert2';
-declare var iziToast: any;
-declare  var jQuery: any;
 
+declare var iziToast: any;
 
 @Component({
-  selector: 'app-update-producto',
-  templateUrl: './update-producto.component.html',
-  styleUrls: ['./update-producto.component.css']
+  selector: 'app-config',
+  templateUrl: './config.component.html',
+  styleUrls: ['./config.component.css']
 })
-export class UpdateProductoComponent  implements OnInit{
+export class ConfigComponent {
 
-  public producto: any ={};
-  public config :any = {};
+  public config: any = {};
+
+  public icono_categoria: string = '';
+  public titulo_categoria: string = '';
+
+  public file : File = undefined;
   public imgSelect: any | ArrayBuffer ;
-  public cargando: boolean = false;
-  public id: any;
   public url;
-  public file: File ;
-  public config_global: any = {}
 
 
+  constructor( private _adminService: AdminService){
 
-  constructor(private _route: ActivatedRoute, private _productoService: ProductosService, private router: Router, private _adminService: AdminService){
-    this.config = {
-      height:500
-   };
+    this.url = GLOBAL.url;
 
-   this.url = GLOBAL.url;
+    this._adminService.obtener_config_admin().subscribe(
+      (resp:any)=>{
+         console.log(resp);
+         this.config = resp.data;
+         this.imgSelect = this.url+ '/getLogo/' + this.config.logo;
+      },
+      (err: any)=>{
+        console.log(err);
 
-   this._adminService.obtener_config_public().subscribe(
-    (resp:any)=>{
-      this.config_global = resp.data
-      console.log(this.config_global);
-    },err=>{
-       console.log(err);
-    }
-  )
-
-  }
-
-  ngOnInit(): void {
-
-    this._route.params.subscribe(
-      params => {
-        this.id = params['id'];
-        this._productoService.get_producto_id(this.id).subscribe(
-          (resp: any)=>{
-            if( resp.data == undefined){
-
-              this.producto = undefined;
-
-            }else{
-
-              this.producto = resp.data
-              console.log(this.producto);
-              //Imagen de portada del producto seleccionado para actualizar
-              this.imgSelect = this.url + '/obtener_portada/'+ this.producto.portada
-            }
-        }, err =>{
-
-        })
       }
-    );
-
+    )
   }
-actualizar(actualizarForm:any){
-
-    this.cargando = true;
-
-    if(actualizarForm.valid){
 
 
-      this._productoService.update_producto_admin( this.producto, this.file, ).subscribe(
-        resp=>{
-          console.log(resp);
-          Swal.fire('Guardado' , 'Cambios guardados', 'success')//viene del sweetalert2
-          this.cargando = false;
+  agregarCategoria(){
+    if( this.icono_categoria && this.titulo_categoria){
+      console.log(uuidv4());
+      this.config.categorias.push({
+        titulo: this.titulo_categoria,
+        icono: this.icono_categoria,
+        _id: uuidv4()// viene del paquete npm install uuid para darle un id
 
-           this.router.navigateByUrl('/panel/productos')
-        },
-        error =>{
-          console.log(error);
-          Swal.fire('Error',error.error.msg, 'error');
-          this.cargando = false;
+      });
+      this.icono_categoria = '';
+      this.titulo_categoria = '';
 
-        }
-      )
     }else{
       iziToast.show({
         title:'ERROR',
         titleColor:'#ff0000',
         class: 'text-danger',
         position: 'topRight',
-        message: 'Formulario no válido'
-      })
-    }
+        message: 'Debe ingresar un titulo e icono para la categoria '
+      })    }
   }
- /**Para la carga de la imagen */
+
+  actulizar(configForn: any){
+
+     if(configForn.valid){
+       let data = {
+        titulo: configForn.value.titulo,
+        serie: configForn.value.serie,
+        correlativo: configForn.value.correlativo,
+        categorias: this.config.categorias,
+        logo: this.file
+       }
+
+       console.log(data);
+
+       this._adminService.actualiza_config_admin("66dd4b3812a1df431d7ffe96", data).subscribe(
+        resp=>{
+          console.log(resp);
+          Swal.fire('Guardado' , 'Cambios guardados', 'success')//viene del sweetalert2
+
+        },
+        err =>{
+
+        }
+       )
+
+
+     }else{
+      iziToast.show({
+        title:'ERROR',
+        titleColor:'#ff0000',
+        class: 'text-danger',
+        position: 'topRight',
+        message: 'Complete el formulario correctamente '
+      })    }
+     }
+
+/**Para la carga de la imagen */
  fileChangeEvent( event: any){
   var file;
    if( event.target.files && event.target.files[0]){
@@ -128,17 +125,19 @@ actualizar(actualizarForm:any){
 
      //si tiene los formatos permitidos es una imagen
      if( file.type == 'image/png' || file.type == 'image/jpg' || file.type == 'image/webp' ||file.type == 'image/jpeg' ||  file.type == 'image/gif'){
-
        //cargamos la imagen
        const reader = new FileReader();
        reader.onload = e => this.imgSelect = reader.result;
+       //para que se muestre la imgagen previa
+      $('.cs-file-drop-icon').addClass('cs-file-drop-preview img-thumbail rounded');
+      $('.cs-file-drop-icon').removeClass('cs-file-drop-icon cxi-upload');
        reader.readAsDataURL(file);
 
        //se pone el label con el id=input-portada con este texto
        $('#input-portada').text(file.name)
 
+
        this.file = file
-       console.log(this.file);
 
      }else{
        iziToast.show({
@@ -175,4 +174,16 @@ actualizar(actualizarForm:any){
 
   console.log(this.file);
 }
+
+//para que se muestre la imgagen previa
+ngDoCheck(): void {
+  $('.cs-file-drop-preview').html("<img src ="+ this.imgSelect + ">")
+
 }
+
+
+eliminar_categoria(idx: any){
+   this.config.categorias.splice( idx, 1)
+}
+  }
+

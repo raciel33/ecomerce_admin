@@ -18,7 +18,8 @@ import { CreateCuponComponent } from './cupones/create-cupon/create-cupon.compon
 import { IndexCuponComponent } from './cupones/index-cupon/index-cupon.component';
 
 import {NgxPaginationModule} from 'ngx-pagination';
-import { UpdateCuponComponent } from './cupones/update-cupon/update-cupon.component'; // <-- import the module
+import { UpdateCuponComponent } from './cupones/update-cupon/update-cupon.component';
+import { ConfigComponent } from './config/config.component'; // <-- import the module
 
 
 
@@ -38,7 +39,8 @@ import { UpdateCuponComponent } from './cupones/update-cupon/update-cupon.compon
    IventarioProductoComponent,
    CreateCuponComponent,
    IndexCuponComponent,
-   UpdateCuponComponent
+   UpdateCuponComponent,
+   ConfigComponent
 
   ],
   imports: [

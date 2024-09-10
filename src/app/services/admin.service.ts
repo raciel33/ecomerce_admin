@@ -114,4 +114,38 @@ validarToken( allowedRoles: string[]):boolean{
    }
 
 
+   obtener_config_admin(){
+    return this._http.get(`${this.url}/obtener_config_admin` , this.headers)
+
+   }
+   actualiza_config_admin( id: any, data: any){
+
+    console.log(data.logo);
+
+    if( data.logo == undefined){
+      console.log(data);
+
+      return this._http.put(`${this.url}/actualiza_config_admin/+${id}`  , data , this.headers)
+    }
+
+    else{
+      const formData = new FormData();
+      formData.append('titulo', data.titulo );
+      formData.append('serie', data.serie );
+      formData.append('correlativo', data.correlativo );
+      formData.append('categorias',JSON.stringify(data.categorias));
+      formData.append('logo', data.logo );
+
+
+      return this._http.put(`${this.url}/actualiza_config_admin/+${id}`, formData ,  this.headers )
+
+    }
+
+   }
+   obtener_config_public( ){
+
+    return this._http.get(`${this.url}/obtener_config_public`, this.headers)
+
+   }
+
 }

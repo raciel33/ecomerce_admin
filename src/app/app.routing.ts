@@ -14,6 +14,7 @@ import { IventarioProductoComponent } from './components/productos/iventario-pro
 import { CreateCuponComponent } from './components/cupones/create-cupon/create-cupon.component';
 import { IndexCuponComponent } from './components/cupones/index-cupon/index-cupon.component';
 import { UpdateCuponComponent } from './components/cupones/update-cupon/update-cupon.component';
+import { ConfigComponent } from './components/config/config.component';
 
 
 const appRoute : Routes = [
@@ -34,6 +35,7 @@ const appRoute : Routes = [
       { path: 'cupones/:id', component: UpdateCuponComponent, canActivate: [ AdminGuard ] },
 
 
+      { path: 'configuraciones', component: ConfigComponent, canActivate: [ AdminGuard ] },
 
 
 

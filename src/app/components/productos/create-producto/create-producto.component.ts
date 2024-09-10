@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProductosService } from '../../../services/productos.service';
 import { TinyMCE } from 'src/assets/tinymce/tinymce';
+import { AdminService } from 'src/app/services/admin.service';
 
 
 declare var iziToast: any;
@@ -27,11 +28,22 @@ export class CreateProductoComponent {
   }
   public cargando: boolean = false;
 
+  public config_global: any = {};
 
-   constructor( private _productoService: ProductosService,private _router: Router){
+   constructor( private _productoService: ProductosService,private _router: Router, private _adminService: AdminService){
      this.config = {
        height:500
-    }
+    };
+
+    this._adminService.obtener_config_public().subscribe(
+      (resp:any)=>{
+        this.config_global = resp.data
+        console.log(this.config_global);
+      },err=>{
+         console.log(err);
+      }
+    )
+
    }
   registro(registroForm: any){
      this.cargando = true;
