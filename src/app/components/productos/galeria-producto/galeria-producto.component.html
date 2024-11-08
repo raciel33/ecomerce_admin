@@ -1,0 +1,125 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 pb-2 mt-lg-2 mb-5">
+    <div class="border-bottom pt-5 mt-2 mb-5">
+        <h1 class="mt-2 mt-md-4 mb-3 pt-5">Producto</h1>
+        <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+            <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" [routerLink]="['/panel/productos']" rel="noopener">Regresar<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
+
+
+        </div>
+    </div>
+
+    <div class="card box-shadow-sm">
+        <div class="card-header">
+            <h5 style="margin-bottom: 0px;">Galeria del producto</h5>
+        </div>
+        <div class="card-body">
+            <div style="max-width: 48rem;">
+                <div class="row mb-5">
+                    <div class="col-md-4" style="padding-right: 0px;">
+                        <img [src]=" url + '/obtener_portada/'+ producto.portada" class="img-thumbnail rounded-0" alt="Square image">
+
+                    </div>
+                    <div class="col-md-8" style="padding-left: 0px;">
+                        <div class="card" style="height: 100%; background: #f5eeee;">
+                            <div class="card-body">
+                                <h3 class="card-product-title text-truncate mb-2">
+                                    <p class="mb-3 fs-2">{{producto.titulo}}</p>
+                                </h3>
+                                <p class="text-muted">{{producto.descripcion}}</p>
+                                <div class="d-flex align-items-center">
+                                    <span class="h5 d-inline-block mb-0 text-danger">{{producto.precio}}€</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group row align-items-center">
+                    <label class="col-md-3 col-form-label  font-weight-medium" for="text-input">Nueva imagen</label>
+
+                    <div class="col-md-9">
+                        <!--Para la subida de img utlizo este estilo d createX Nota: hay que poner
+                      cs delante en class para que funcione los estilos-->
+                        <!-- Drag and drop file upload -->
+                        <div class="cs-file-drop-area">
+                            <div class="cs-file-drop-preview img-thumbnail rounded">
+                                <img [src]="imgSelect" alt="">
+                            </div>
+                            <span class="cs-file-drop-message">Haz click en la imagen para seleccionar</span>
+                            <input id="input-img" type="file" class="cs-file-drop-input" (change)="fileChangeEvent($event)">
+                            <ng-container *ngIf="file != undefined">
+
+                                <button type="button" (click)="agregarImagen()" class="cs-file-drop-btn btn btn-outline-primary btn-sm">Subir imagen</button>
+                                <button *ngIf="cargando" type="button" class="btn btn-primary" disabled>
+                              <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+                              Guardando...
+                            </button>
+                            </ng-container>
+                            <ng-container *ngIf="file == undefined">
+                                <button type="button" class="btn btn-outline-secondary btn-sm" disabled>Selecciona imagen</button>
+
+                            </ng-container>
+
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+
+                    </div>
+                    <div class="col-md-12">
+                        <table class="table table-sm" *ngIf="producto.galeria">
+                            <ng-container *ngIf="producto.galeria.length == 0">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2" class="text-center">
+                                            <span class="text-muted">
+                                              No hay imagenes de este producto en la galería
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </ng-container>
+                        </table>
+
+
+                    </div>
+
+                </div>
+
+            </div>
+            <hr>
+            <!--TENGO QUE ARREGLAR LOS ESTILOS DE LA GALERIA DE IMAGENES DEL PRODUCTO PARA QUE SE VEA MEJOR
+            -->
+            <ng-container *ngIf="producto.galeria">
+                <div *ngIf="producto.galeria.length >= 1">
+                    <div class="row row-cols-6 row-cols-md-6 g-6">
+                        <div class="col" *ngFor="let item of producto.galeria, let i = index ">
+                            <div class="card h-100">
+                                <img [src]=" url + '/obtener_portada/'+ item.imagen" class="card-img-top p-2 h-75" alt="Card image">
+                                <div class="d-grid gap-2 ">
+
+                                    <a (click)="borrarImagen(item._id, item.imagen)" class="btn btn-sm btn-outline-danger  cxi-delete"></a>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-container>
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+    </div>
+
+</div>

@@ -1,0 +1,110 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Descuentos</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo lista todos los descuentos de la tienda.</p>
+        <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" [routerLink]="['/panel/descuentos/registro']" rel="noopener">Registrar nuevo<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
+    </div>
+</div>
+
+<div class="card box-shadow-sm">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Filtro de descuentos</h5>
+    </div>
+
+    <div class="card-body">
+        <div class="row animated fadeIn fast" *ngIf="cargando">
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <!-- Custom size border spinner -->
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-header">
+            <div class="row">
+                <div class="col-8">
+                    <div class="input-group">
+                        <input class="form-control" type="text" name="filtro" placeholder="Titulo descuento " [(ngModel)]="filtro" #txtTermino>
+                        <button class="form-control btn btn-primary" (click)="filtrar_descuentos()" type="button">Filtrar</button>
+                        <button class="form-control btn btn-info" (click)="reset()" type="button">Reset</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <table *ngIf="!cargando">
+
+        </table>
+        <ng-container>
+
+            <div class="table-responsive" *ngIf="!cargando">
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Título</th>
+                            <th>Descuento</th>
+                            <th>Vigencia</th>
+                            <th>Estado</th>
+                            <th>OP</th>
+
+
+                        </tr>
+                    </thead>
+
+
+                    <tbody *ngFor="let item of descuento ; let i = index">
+                        <tr>
+                            <td>
+                                <!--para la img de portada se inyecta directamente la ruta establecida en el backend-->
+                                <h6 style="padding-bottom: 0;margin-bottom: 0;">
+                                    <img style="width: 50px;" [src]=" url + '/get_img_banner_descuento/'+ item.banner" class="img-thumbnail rounded-0" alt="Square image"> {{item.titulo}}
+                                </h6>
+                            </td>
+                            <td>{{item.descuento}}%</td>
+                            <td>{{item.fecha_inicio}} / {{item.fecha_fin}}</td>
+                            <td>
+                                <span class="badge bg-primary" *ngIf="item.estado == 'Proximamente'"> {{item.estado}}</span>
+                                <span class="badge bg-danger" *ngIf="item.estado == 'Expirado'">{{item.estado}}</span>
+                                <span class="badge bg-success" *ngIf="item.estado == 'Vigente'">{{item.estado}}</span>
+                            </td>
+                            <td>
+                                <div class="btn-group dropdown d-inline-block mb-3 mr-2  ">
+                                    <button class="btn btn-outline-secondary btn-sm  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           Opciones
+                          </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" [routerLink]="['/panel/descuentos', item._id]">Editar descuento</a></li>
+                                        <li><a class="dropdown-item" (click)="delete_descuento( item )">Eliminar descuento</a></li>
+
+                                    </ul>
+                                </div>
+                            </td>
+
+                            <td>
+
+                            </td>
+                        </tr>
+                    </tbody>
+                    <tbody *ngIf="descuento.length == 0 ">
+                        <tr>
+                            <td colspan="5" class="text-danger text-center">No hay descuentos en los registros</td>
+                        </tr>
+                    </tbody>
+
+
+                </table>
+            </div>
+
+        </ng-container>
+    </div>
+    <!-- <div class="card-footer">
+        <div *ngIf="txtTermino.value.length === 0">
+            <button (click)="cambiarPagina(-5)" class="btn btn-secondary">Anteriores</button> &nbsp;
+            <button (click)="cambiarPagina(5)" class="btn btn-secondary">Siguiente</button>
+        </div>
+    </div> -->
+
+</div>

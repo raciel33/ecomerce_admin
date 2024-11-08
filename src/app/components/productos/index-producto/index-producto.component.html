@@ -30,8 +30,9 @@
                         <input class="form-control" type="text" name="filtro" placeholder="Titulo producto " [(ngModel)]="filtro" #txtTermino>
                         <button class="form-control btn btn-primary" (click)="filtrar_productos()" type="button">Filtrar</button>
                         <button class="form-control btn btn-info" (click)="reset()" type="button">Reset</button>
-
-
+                    </div>
+                    <div class="col-12 mt-3">
+                        <button class="btn btn-success" (click)="donwload_excel()">Exportar a Excel</button>
                     </div>
                 </div>
             </div>
@@ -78,6 +79,9 @@
                                         <li><a class="dropdown-item" [routerLink]="['/panel/productos', item._id]">Editar producto</a></li>
                                         <li><a class="dropdown-item" (click)="borrarProducto( item )">Eliminar producto</a></li>
                                         <li><a class="dropdown-item" [routerLink]="['/panel/productos/inventario', item._id]">Inventario</a></li>
+                                        <li><a class="dropdown-item" [routerLink]="['/panel/productos/variedades', item._id]">Variedades</a></li>
+                                        <li><a class="dropdown-item" [routerLink]="['/panel/productos/galeria', item._id]">Galería</a></li>
+
 
 
                                     </ul>

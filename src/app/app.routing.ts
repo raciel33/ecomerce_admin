@@ -15,6 +15,11 @@ import { CreateCuponComponent } from './components/cupones/create-cupon/create-c
 import { IndexCuponComponent } from './components/cupones/index-cupon/index-cupon.component';
 import { UpdateCuponComponent } from './components/cupones/update-cupon/update-cupon.component';
 import { ConfigComponent } from './components/config/config.component';
+import { VariedadProductoComponent } from './components/productos/variedad-producto/variedad-producto.component';
+import { GaleriaProductoComponent } from './components/productos/galeria-producto/galeria-producto.component';
+import { IndexDescuentoComponent } from './components/descuento/index-descuento/index-descuento.component';
+import { EditDescuentoComponent } from './components/descuento/edit-descuento/edit-descuento.component';
+import { CreateDescuentoComponent } from './components/descuento/create-descuento/create-descuento.component';
 
 
 const appRoute : Routes = [
@@ -29,6 +34,8 @@ const appRoute : Routes = [
       { path: 'productos', component: IndexProductoComponent, canActivate: [ AdminGuard ] },
       { path: 'productos/:id', component: UpdateProductoComponent, canActivate: [ AdminGuard ] },
       { path: 'productos/inventario/:id', component: IventarioProductoComponent, canActivate: [ AdminGuard ] },
+      { path: 'productos/variedades/:id', component: VariedadProductoComponent, canActivate: [ AdminGuard ] },
+      { path: 'productos/galeria/:id', component: GaleriaProductoComponent, canActivate: [ AdminGuard ] },
 
       { path: 'cupones/registro', component: CreateCuponComponent, canActivate: [ AdminGuard ] },
       { path: 'cupones', component: IndexCuponComponent, canActivate: [ AdminGuard ] },
@@ -37,6 +44,9 @@ const appRoute : Routes = [
 
       { path: 'configuraciones', component: ConfigComponent, canActivate: [ AdminGuard ] },
 
+      { path: 'descuentos', component: IndexDescuentoComponent, canActivate: [ AdminGuard ] },
+      { path: 'descuentos/registro', component: CreateDescuentoComponent, canActivate: [ AdminGuard ] },
+      { path: 'descuentos/:id', component: EditDescuentoComponent, canActivate: [ AdminGuard ] },
 
 
  ]},

@@ -19,7 +19,12 @@ import { IndexCuponComponent } from './cupones/index-cupon/index-cupon.component
 
 import {NgxPaginationModule} from 'ngx-pagination';
 import { UpdateCuponComponent } from './cupones/update-cupon/update-cupon.component';
-import { ConfigComponent } from './config/config.component'; // <-- import the module
+import { ConfigComponent } from './config/config.component';
+import { VariedadProductoComponent } from './productos/variedad-producto/variedad-producto.component';
+import { GaleriaProductoComponent } from './productos/galeria-producto/galeria-producto.component';
+import { EditDescuentoComponent } from './descuento/edit-descuento/edit-descuento.component';
+import { IndexDescuentoComponent } from './descuento/index-descuento/index-descuento.component';
+import { CreateDescuentoComponent } from './descuento/create-descuento/create-descuento.component'; // <-- import the module
 
 
 
@@ -40,7 +45,12 @@ import { ConfigComponent } from './config/config.component'; // <-- import the m
    CreateCuponComponent,
    IndexCuponComponent,
    UpdateCuponComponent,
-   ConfigComponent
+   ConfigComponent,
+   VariedadProductoComponent,
+   GaleriaProductoComponent,
+   EditDescuentoComponent,
+   IndexDescuentoComponent,
+   CreateDescuentoComponent
 
   ],
   imports: [
@@ -48,7 +58,8 @@ import { ConfigComponent } from './config/config.component'; // <-- import the m
     FormsModule,
     ReactiveFormsModule,RouterModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
 
   ],
   exports:[

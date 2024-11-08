@@ -125,6 +125,35 @@ registro_inventario(data: any):Observable<any>{
 
 }
 
+update_producto_variedades( id: string, data: any ):Observable<any>{
+
+  let headers = new HttpHeaders({'x-token': this.token})
+
+    return this._http.put(`${this.url}/update_producto_variedades/` + id, data , { headers: headers })
+
+}
+agregar_img_galeria_admin(id: any,data:any):Observable<any>{
+
+  let headers = new HttpHeaders({'x-token': this.token})
+
+   console.log(data);
+  const formData = new FormData();
+  formData.append('_id', data._id );
+  formData.append('imagen', data.imagen );
+
+
+
+  return this._http.put(`${this.url}/agregar_img_galeria_admin/`+ id, formData , { headers: headers })
+
+ }
+
+ eliminar_img_galeria_admin( id: string, data: { _id: any, imagen: string } ):Observable<any>{
+
+  let headers = new HttpHeaders({'x-token': this.token})
+
+    return this._http.put(`${this.url}/eliminar_img_galeria_admin/` + id, data , { headers: headers })
+
+}
 
 }
 

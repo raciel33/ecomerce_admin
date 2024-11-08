@@ -85,6 +85,11 @@ validarToken( allowedRoles: string[]):boolean{
           return false;
         }
 
+        if (helper.isTokenExpired( token)) {
+          localStorage.clear();
+          return false;
+        }
+
 
       } catch (error) {
         localStorage.removeItem('token');

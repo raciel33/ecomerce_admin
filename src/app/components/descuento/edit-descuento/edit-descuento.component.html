@@ -1,0 +1,98 @@
+<app-sidebar></app-sidebar>
+
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Descuentos</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo actualiza los descuentos de la tienda.</p>
+
+    </div>
+</div>
+
+<div class="card box-shadow-sm">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Actualización de Descuentos</h5>
+    </div>
+
+</div>
+
+<ng-container *ngIf="descuento">
+    <form #actualizarForm="ngForm" (ngSubmit)="actualizar(actualizarForm)">
+        <div class="card-body" *ngIf="descuento!=undefined">
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label for="">Titulo del descuento</label>
+                            <input type="text" class="form-control" placeholder="Titulo de producto" required name="titulo" [(ngModel)]="descuento.titulo">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Fecha inicio</label>
+                            <input type="date" class="form-control" required name="fecha_inicio" [(ngModel)]="descuento.fecha_inicio">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Fecha fin</label>
+                            <input type="date" class="form-control" required name="fecha_fin" [(ngModel)]="descuento.fecha_fin">
+                        </div>
+                        <div class="col-lg-6 form-group">
+                            <label for="">Descuento %</label>
+                            <input type="text" class="form-control" placeholder="Porcentaje del descuento" required name="descuento" [(ngModel)]="descuento.descuento">
+                        </div>
+
+
+
+
+                        <!---->
+                        <div class="col-lg-12 form-group">
+                            <!--
+                        <tinymce [config]="config" name="contenido" [(ngModel)]="producto.contenido"></tinymce>
+                      -->
+
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="row">
+                        <div class="col-lg-12 form-group">
+                            <label for="">Banner</label>
+                            <div class="custom-file">
+                                <input class="custom-file-input" type="file" id="file-input" (change)="fileChangeEvent($event)">
+                                <label class="custom-file-label" for="file-input" id="input-portada" style="white-space: nowrap; overflow: hidden;;">Seleccionar imagen</label>
+                            </div>
+                        </div>
+                        <div class="col-lg-12">
+                            <img [src]="imgSelect" class="img-thumbnail" alt="Rounded image">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-body" *ngIf="descuento == undefined">
+            <h1>No se encontró el registro</h1>
+            <div class="col-3 mx-auto">
+
+                <img src="../../../../assets/img/advertencia.png" width="100%">
+            </div>
+        </div>
+        <div class="card-footer">
+            <button *ngIf="!cargando" class="btn btn-primary mr-3" type="submit">Actualizar descuento</button>
+            <a class="btn btn-warning" [routerLink]="['/panel/descuentos']">Regresar</a>
+            <button *ngIf="cargando" type="button" class="btn btn-secondary" disabled>
+          <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+          Actualizando...
+        </button>
+        </div>
+    </form>
+
+</ng-container>
+<ng-container *ngIf="descuento == undefined">
+    <div class="card">
+        <div class="card-body">
+            <h1>No se encontró el registro</h1>
+            <div class="col-3 mx-auto">
+
+                <img src="../../../../assets/img/advertencia.png" width="100%">
+            </div>
+        </div>
+    </div>
+</ng-container>

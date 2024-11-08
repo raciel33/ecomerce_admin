@@ -9,6 +9,9 @@ export class Producto {
     public categoria?:string,
     public descripcion?: string,
     public _id?: string,
+    public titulo_variedad?: string,
+    public variedades?: any
+
 
 
 

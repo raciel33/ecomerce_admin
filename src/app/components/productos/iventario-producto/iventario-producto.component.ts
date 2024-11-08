@@ -4,6 +4,10 @@ import { Producto } from 'src/app/models/producto.model';
 import { ProductosService } from 'src/app/services/productos.service';
 import Swal from 'sweetalert2';
 declare var iziToast: any;
+//PARA EXPORTAR A EXCEL
+import { Workbook } from 'exceljs';
+import  * as fs from 'file-saver';
+
 
 @Component({
   selector: 'app-iventario-producto',
@@ -18,6 +22,9 @@ export class IventarioProductoComponent implements OnInit {
   public inventario: Array<any> = [];
   public inventarios: any = {};
   public _idUser: any;
+
+  public array_inventario: any = [];
+
 
 
 
@@ -48,7 +55,20 @@ export class IventarioProductoComponent implements OnInit {
               this._productoService.listar_inventario_producto_admin( this.producto._id).subscribe(
                 resp=>{
                   console.log(resp);
-                  this.inventario = resp.data
+                  this.inventario = resp.data;
+
+                   //se añaden en this.array_productos los campos que se exportan a excel
+                  this.inventario.forEach((element: any ) => {
+                    this.array_inventario.push({
+                       admin: element.admin.nombres + ' '+ element.admin.apellidos,
+                       cantidad: element.cantidad,
+                       proveedor: element.proveedor,
+
+                      })
+
+                 });
+
+
 
                 },
                 err=>{
@@ -123,7 +143,6 @@ eliminar_inventario_producto(id:any){
                 console.log(resp);
                 this.inventario = resp.data
 
-                this._router.navigate(['/panel/productos'])
               },
 
               err=>{
@@ -148,4 +167,44 @@ eliminar_inventario_producto(id:any){
     }
 
   }
+
+  //Descarga de un excel con los productos
+donwload_excel(){
+  let workbook = new Workbook();
+  let worksheet = workbook.addWorksheet("Reporte de productos");
+
+  worksheet.addRow(undefined);
+  for (let x1 of this.array_inventario){
+    let x2=Object.keys(x1);
+
+    let temp=[]
+    for(let y of x2){
+      temp.push(x1[y])
+    }
+    worksheet.addRow(temp)
+  }
+
+  let fname='REP01- ';
+
+  worksheet.columns = [
+    { header: 'Trabajador', key: 'col1', width: 30},
+    { header: 'Cantidad', key: 'col2', width: 15},
+    { header: 'Proveedor', key: 'col3', width: 30},
+
+  ]as any;
+
+  workbook.xlsx.writeBuffer().then((data) => {
+    let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+    fs.saveAs(blob, fname+'-'+new Date().valueOf()+'.xlsx');
+  });
+
+  iziToast.show({
+    title:'OK',
+    titleColor:'#0D922A',
+    class: 'text-success',
+    position: 'topRight',
+    message: 'Excel descargado correctamente'
+   }
+ )
+}
 }
