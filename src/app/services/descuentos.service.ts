@@ -51,7 +51,7 @@ delete_descuento(id: any){
 
     let headers = new HttpHeaders({'x-token': this.token})
 
-    console.log( file);
+    console.log( data);
 
     const formData = new FormData();
     formData.append('titulo', data.titulo );
@@ -64,6 +64,7 @@ delete_descuento(id: any){
     return this._http.post(`${this.url}/registro_descuento_admin`, formData , { headers: headers })
 
    }
+//
 
  get_descuento_id( id: any ):Observable<any>{
 

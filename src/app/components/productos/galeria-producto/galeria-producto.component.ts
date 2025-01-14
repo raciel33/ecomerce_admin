@@ -94,12 +94,12 @@ export class GaleriaProductoComponent implements OnInit {
                message: 'Imagen subida correctamente'
               }
             )
+            this.init_data();
 
           }, err=>{
           }
         )
 
-        this.init_data();
         this.imgSelect = 'assets/img/01.jpg';
 
 

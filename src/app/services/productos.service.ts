@@ -154,6 +154,30 @@ agregar_img_galeria_admin(id: any,data:any):Observable<any>{
     return this._http.put(`${this.url}/eliminar_img_galeria_admin/` + id, data , { headers: headers })
 
 }
+//
+listar_reviews_producto_publico(id: any):Observable<any>{
 
+
+  return this._http.get(`${this.url}/listar_reviews_producto_publico/${id}`, this.headers)
+
+}
+
+
+descuento_unico_producto( id: any, data: any):Observable<any>{
+
+
+
+      return this._http.put(`${this.url}/descuento_unico_producto/${id}`, data , this.headers )
+
+    }
+
+eliminar_descuento_producto( id: any, data: any):Observable<any>{
+
+  let headers = new HttpHeaders({'x-token': this.token})
+
+
+  return this._http.put(`${this.url}/eliminar_descuento_producto/${id}` ,data, { headers: headers }   )
+
+}
 }
 

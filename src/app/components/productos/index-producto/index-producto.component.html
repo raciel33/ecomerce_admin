@@ -78,10 +78,11 @@
                                     <ul class="dropdown-menu">
                                         <li><a class="dropdown-item" [routerLink]="['/panel/productos', item._id]">Editar producto</a></li>
                                         <li><a class="dropdown-item" (click)="borrarProducto( item )">Eliminar producto</a></li>
+                                        <li><a class="dropdown-item" [routerLink]="['/panel/productos/descuento', item._id]">Descuento</a></li>
                                         <li><a class="dropdown-item" [routerLink]="['/panel/productos/inventario', item._id]">Inventario</a></li>
                                         <li><a class="dropdown-item" [routerLink]="['/panel/productos/variedades', item._id]">Variedades</a></li>
                                         <li><a class="dropdown-item" [routerLink]="['/panel/productos/galeria', item._id]">Galería</a></li>
-
+                                        <li><a class="dropdown-item" [routerLink]="['/panel/productos/reviews', item._id]">Reseñas</a></li>
 
 
                                     </ul>

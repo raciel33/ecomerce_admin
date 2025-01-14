@@ -1,0 +1,74 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Devoluciones</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo lista todas las Devoluciones de los clientes.</p>
+    </div>
+</div>
+
+<div class="card box-shadow-sm p-2">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Devoluciones</h5>
+
+    </div>
+    <div class="card-body" *ngIf="cargando">
+        <div class="row">
+            <div class="col-12 text-center">
+
+                <div class="spinner-border text-muted" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <ng-container *ngIf="!cargando">
+
+        <div class="card mb-3 mt-2 p-2" style="max-width: 800px;" *ngFor="let item of dev | paginate: { itemsPerPage: pageSize, currentPage: p }">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img [src]=" url + '/obtener_portada/'+ item.producto.portada" class="img-fluid rounded-start" alt="...">
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{item.producto.titulo}}</h5>
+                        <p> <span class="text-primary">{{item.createdAt | date }} </span> </p>
+                        <p class="card-text">Comentario: <span class="text-primary">{{item.comentario }} </span> </p>
+                        Estado: <span class="badge bg-primary" *ngIf="item.estado == 'Iniciada'"> {{item.estado}}</span>
+                        <span class="badge bg-success" *ngIf="item.estado == 'Devuelto'"> {{item.estado}}</span>
+                        <span class="badge bg-danger" *ngIf="item.estado == 'Denegada'"> {{item.estado}}</span>
+
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <p class="card-text">Cliente: <span class="text-primary">{{item.cliente.nombres }} {{item.cliente.apellidos }}</span> </p>
+                        <p class="card-text">Teléfono: <span class="text-primary">{{item.cliente.telefono }} </span> </p>
+                        <p class="card-text">Email: <span class="text-primary">{{item.cliente.email }} </span> </p>
+
+                    </div>
+                </div>
+                <ng-container *ngIf="item.estado == 'Iniciada'">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3 mr-2">
+                        <button class="btn btn-primary me-md-2" type="button" (click)="aceptar_devolucion( item._id )">Aceptar</button>
+                        <button class="btn btn-danger" type="button" (click)="denegar_devolucion( item._id )">Denegar</button>
+                    </div>
+                </ng-container>
+
+
+                <ng-container *ngIf="item.estado == 'Denegada'">
+
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-3 mr-2">
+                        <button class="btn btn-primary me-md-2" type="button" (click)="aceptar_devolucion( item._id )">Aceptar</button>
+                    </div>
+                </ng-container>
+
+            </div>
+
+        </div>
+        <div class="card-footer">
+
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+        </div>
+
+    </ng-container>
+</div>

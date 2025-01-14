@@ -24,8 +24,16 @@ import { VariedadProductoComponent } from './productos/variedad-producto/varieda
 import { GaleriaProductoComponent } from './productos/galeria-producto/galeria-producto.component';
 import { EditDescuentoComponent } from './descuento/edit-descuento/edit-descuento.component';
 import { IndexDescuentoComponent } from './descuento/index-descuento/index-descuento.component';
-import { CreateDescuentoComponent } from './descuento/create-descuento/create-descuento.component'; // <-- import the module
+import { CreateDescuentoComponent } from './descuento/create-descuento/create-descuento.component';
+import { IndexContactoComponent } from './contacto/index-contacto/index-contacto.component';
+import { ReviewProductoComponent } from './productos/iventario-producto/review-producto/review-producto.component';
+import { IndexVentasComponent } from './ventas/index-ventas/index-ventas.component';
+import { DetalleVentasComponent } from './ventas/detalle-ventas/detalle-ventas.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DescuentoProductoComponent } from './productos/descuento-producto/descuento-producto.component';
+import { DevolucionesComponent } from './productos/devoluciones/devoluciones.component';
 
 
 
@@ -50,7 +58,14 @@ import { CreateDescuentoComponent } from './descuento/create-descuento/create-de
    GaleriaProductoComponent,
    EditDescuentoComponent,
    IndexDescuentoComponent,
-   CreateDescuentoComponent
+   CreateDescuentoComponent,
+   IndexContactoComponent,
+   ReviewProductoComponent,
+   IndexVentasComponent,
+   DetalleVentasComponent,
+   DescuentoProductoComponent,
+   DevolucionesComponent,
+
 
   ],
   imports: [
@@ -59,6 +74,7 @@ import { CreateDescuentoComponent } from './descuento/create-descuento/create-de
     ReactiveFormsModule,RouterModule,
     HttpClientModule,
     NgxPaginationModule,
+    NgxChartsModule,BrowserAnimationsModule
 
 
   ],

@@ -37,8 +37,9 @@ export class CreateProductoComponent {
 
     this._adminService.obtener_config_public().subscribe(
       (resp:any)=>{
+        console.log(resp);
         this.config_global = resp.data
-        console.log(this.config_global);
+       // console.log(this.config_global);
       },err=>{
          console.log(err);
       }

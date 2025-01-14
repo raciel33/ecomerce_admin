@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ComponentsModule } from './components/components.module';
 import { RouterModule } from '@angular/router';
@@ -13,6 +14,7 @@ import { routing } from './app.routing';
 import { NgxTinymceModule } from 'ngx-tinymce';
 
 import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -28,6 +30,8 @@ import {NgxPaginationModule} from 'ngx-pagination'; // <-- import the module
     HttpClientModule,
     ReactiveFormsModule,
     ComponentsModule,
+    BrowserAnimationsModule,
+    NgxChartsModule,
     routing,
     RouterModule,
     NgxTinymceModule.forRoot({

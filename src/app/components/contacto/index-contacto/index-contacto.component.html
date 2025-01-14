@@ -1,0 +1,62 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Mensajes</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo lista todos los mensajes de los clientes.</p>
+    </div>
+</div>
+
+<div class="card box-shadow-sm">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Mensajes</h5>
+
+    </div>
+    <div class="card-body" *ngIf="cargando">
+        <div class="row">
+            <div class="col-12 text-center">
+
+                <div class="spinner-border text-muted" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="card-body" *ngIf="!cargando">
+        <!-- Product review -->
+        <div class="mb-4 pb-4 border-bottom" *ngFor="let item of mensajes">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+                    <h3 class="mb-2 fs-lg">{{item.cliente}}</h3>
+                    <span class="d-block mb-3 fs-sm text-muted">{{item.createdAt | date}}</span>
+                    <span class="d-block mb-3 fs-sm text-muted">Teléfono: {{item.telefono}}</span>
+
+                    <span class="badge bg-primary" *ngIf="item.estado == 'Abierto'">{{item.estado}}</span>
+                    <span class="badge bg-danger" *ngIf="item.estado == 'Cerrado'">{{item.estado}}</span>
+
+                </div>
+                <div class="col">
+                    <h6>Asunto: {{item.asunto}}</h6>
+                    <p class="mb-3">
+                        <a class="me-1 fw-bold text-decoration-none">{{item.email}}</a>{{ item.mensaje}}
+                    </p>
+                    <div class="d-flex justify-content-between">
+                        <a class="nav-link p-0 fs-sm" (click)="cerrarMensaje(  item._id)">
+                            <i class="cxi-cross me-2 fs-base align-middle mt-n1"></i> Cerrar mensaje
+                        </a>
+
+
+                    </div>
+                    <a class="btn btn-outline-danger p-1 fs-sm mt-2" (click)="borrar_mensaje_cliente( item )">
+                      Eliminar mensaje
+                 </a>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="card-footer">
+
+        <pagination-controls (pageChange)="p = $event"></pagination-controls>
+    </div>
+</div>

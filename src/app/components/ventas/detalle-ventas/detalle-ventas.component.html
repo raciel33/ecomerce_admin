@@ -1,0 +1,189 @@
+<app-sidebar></app-sidebar>
+<!-- Page title-->
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Detalles de la venta</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo contiene el detalle de la venta </p>
+
+    </div>
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end mb-2">
+        <a [routerLink]="['/panel/ventas']" class="btn btn-outline-primary me-md-2" type="button">Regresar</a>
+    </div>
+</div>
+
+<h5> Order No: {{ order._id.toLowerCase()}}</h5>
+<div class="card box-shadow-sm">
+
+    <div class="card-body">
+
+        <div class="row mb-3">
+            <div class="col-12 mb-4">
+                <div class="card card-body py-3 box-shadow ">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <table class="table mb-0">
+                                <tbody>
+                                    <tr *ngIf="order.cliente">
+                                        <th class="border-0 py-2 pl-0">Cliente</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{ order.cliente.nombres}} {{order.cliente.apellidos}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Teléfono:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{ order.cliente.telefono}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Email:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{ order.cliente.email}}</td>
+                                    </tr>
+
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Fecha:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{ order.createdAt | date }}</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-lg-6">
+                            <table class="table mb-0">
+                                <tbody>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Envío:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{order.envio_titulo}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py- pl-0">Precio envio:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{order.envio_precio}}€</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Transacción:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{order.transaccion}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="border-0 py-2 pl-0">Estado:</th>
+                                        <td class="border-0 py-2 px-0 text-muted">{{order.estado}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-12" *ngIf="order.direccion">
+                <div class="card  mb-3">
+                    <div class="row p-3  ">
+                        <div class="col-12 ">
+                            <h5 class="text-center fw-bold"> Dirección de envío</h5>
+                            <div class="row mb-3 ">
+
+                                <div class="col-md-6 col-sm-4 mb-sm-0 mb-1">
+
+                                    <p>
+                                        {{order.direccion.direccion}}
+                                    </p>
+                                    <p>Código Postal: {{order.direccion.cp}}</p>
+
+                                    <p>
+                                        {{order.direccion.pais}},
+
+                                        <span *ngIf="order.direccion.region">{{order.direccion.region}}</span>,
+                                        <span *ngIf="order.direccion.provincia">{{order.direccion.provincia}}</span>,
+                                        <span *ngIf="order.direccion.poblacion">{{order.direccion.poblacion}}</span>
+
+                                    </p>
+
+
+                                    <span class="badge rounded-pill bg-primary text-white" *ngIf="order.direccion.principal"> Direccion principal</span>
+
+
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card border-bottom">
+
+            <div id="order-1" class="collapse show" data-parent="#orders">
+                <div class="bg-secondary rounded mb-4">
+                    <div class="table-responsive">
+                        <table class="table mb-0">
+                            <tbody>
+                                <tr *ngFor="let item of detail_order">
+                                    <td class="border-top-0">
+                                        <div class="media pl-2 py-2">
+                                            <a href="shop-single.html" style="min-width: 80px;">
+                                                <img [src]=" url + '/obtener_portada/'+ item.producto.portada" width="80" alt="Product thumb">
+                                            </a>
+                                            <div class="media-body pl-3">
+                                                <h3 class="font-size-sm mb-3">
+                                                    <a href="shop-single.html" class="nav-link font-weight-bold">{{item.producto.titulo}}</a>
+                                                </h3>
+                                                <ul class="list-unstyled font-size-xs mt-n2 mb-2">
+                                                    <li class="mb-0"><span class="text-muted">{{item.producto.titulo_variedad}}:</span> {{item.variedad}}</li>
+                                                </ul>
+
+
+
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="border-top-0">
+                                        <div class="py-2">
+                                            <div class="font-size-xs text-muted mb-1">Precio:</div>
+                                            <div class="font-size-sm text-dark">{{item.producto.precio}}€</div>
+                                        </div>
+                                    </td>
+                                    <td class="border-top-0">
+                                        <div class="py-2">
+                                            <div class="font-size-xs text-muted mb-1">Cantidad:</div>
+                                            <div class="font-size-sm text-dark">{{item.cantidad}}</div>
+                                        </div>
+                                    </td>
+                                    <td class="border-top-0">
+                                        <div class="py-2 pr-3 text-right">
+                                            <div class="font-size-xs text-muted mb-1">Subtotal:</div>
+                                            <div class="font-size-sm font-weight-bold text-dark">{{item.subtotal}}€</div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <div class="py-2">
+                                            <span class="font-size-xs text-muted">Envio: </span>
+                                            <span class="font-size-sm text-dark">{{order.envio_precio}}€</span>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+                                        <div class="py-2 pr-3 text-right">
+                                            <span class="font-size-xs text-muted">Total: </span>
+                                            <span class="font-size-sm font-weight-bold text-dark">{{order.subtotal}}</span>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+
+</div>

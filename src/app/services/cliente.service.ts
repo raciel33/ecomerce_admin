@@ -76,7 +76,10 @@ borrar_cliente(id: any):Observable<any>{
 
 }
 
+get_detail_order_cliente( id: any){
+  return this._http.get(`${this.url}/get_detail_order_cliente/`+id , this.headers)
 
+}
 
 
 }

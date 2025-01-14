@@ -20,16 +20,13 @@
 
 <!-- Side navigation (Off-canvas)-->
 <aside class="cs-offcanvas cs-offcanvas-expand bg-dark" id="componentsNav">
-    <div class="cs-offcanvas-cap d-none d-lg-block py-4">
-        <a class="navbar-brand py-2" href="dev-setup.html">
-            <img src="assets/img/components/logo/logo-white.svg" alt="Createx" width="130">
+    <div class="cs-offcanvas-cap d-none d-lg-block py-4 text-center">
+        <a class="navbar-brand py-2 " [routerLink]="['/inicio']" routerLinkActive="active">
+            <img style="border-radius: 50%; box-shadow: 10px 5px 5px gray; ;" src="assets/img/components/logo/logo.jpg" alt="Createx" width="130">
         </a>
-        <span class="badge badge-warning">Docs</span>
     </div>
     <div class="cs-offcanvas-cap d-flex d-lg-none">
         <div class="d-flex align-items-center mt-1">
-            <h5 class="text-light mb-0 mr-3">Menu</h5>
-            <span class="badge badge-warning">Docs</span>
         </div>
         <button class="close text-light" type="button" data-dismiss="offcanvas" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -47,8 +44,11 @@
             <a class="nav-link px-4" [routerLink]="['/panel/clientes']" routerLinkActive="active">Cliente</a>
             <a class="nav-link px-4" [routerLink]="['/panel/productos']" routerLinkActive="active">Productos</a>
             <a class="nav-link px-4" [routerLink]="['/panel/cupones']" routerLinkActive="active">Cupones</a>
-            <a class="nav-link px-4" [routerLink]="['/panel/configuraciones']" routerLinkActive="active">Configuracion</a>
             <a class="nav-link px-4" [routerLink]="['/panel/descuentos']" routerLinkActive="active">Descuentos</a>
+            <a class="nav-link px-4" [routerLink]="['/panel/contacto']" routerLinkActive="active">Mensajes</a>
+            <a class="nav-link px-4" [routerLink]="['/panel/ventas']" routerLinkActive="active">Ventas</a>
+            <a class="nav-link px-4" [routerLink]="['/panel/devoluciones']" routerLinkActive="active">Devoluciones</a>
+            <a class="nav-link px-4" [routerLink]="['/panel/configuraciones']" routerLinkActive="active">Configuracion</a>
 
 
 

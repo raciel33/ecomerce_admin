@@ -1,0 +1,106 @@
+<app-sidebar></app-sidebar>
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Reseñas</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo las reseñas de este producto</p>
+        <p class="font-size-sm font-weight-medium pl-md-4"><a class="text-nowrap" [routerLink]="['/panel/productos']" rel="noopener">Regresar<i class="cxi-angle-right font-size-base align-middle ml-1"></i></a></p>
+    </div>
+</div>
+<div class="card box-shadow-sm " *ngIf="producto == undefined ">
+    <div class="card-body">
+        <h1 class="text-center">No se encontró el registro</h1>
+        <div class="row">
+            <div class="col-3 mx-auto">
+                <img src="assets/img/advertencia.png" alt="" style="width: 100%;">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div class="card box-shadow-sm " *ngIf="producto">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Reseñas de
+            <span class="fs-3">{{producto.titulo}}</span>
+        </h5>
+    </div>
+
+    <div class="card-body">
+        <div class="row animated fadeIn fast" *ngIf="cargando">
+            <div class="col-12">
+                <div class="alert alert-info text-center" role="alert">
+                    <!-- Custom size border spinner -->
+                    <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row mb-5">
+            <div class="col-8">
+                <div class="row">
+
+                    <div class="col-md-4" style="padding-right: 0px;">
+                        <img [src]=" url + '/obtener_portada/'+ producto.portada" class="img-thumbnail rounded-0" alt="Square image">
+
+                    </div>
+                    <div class="col-md-8" style="padding-left: 0px;">
+                        <div class="card" style="height: 100%; background: #f5eeee;">
+                            <div class="card-body">
+                                <h3 class="card-product-title text-truncate mb-2">
+                                    <p class="mb-3 fs-2">{{producto.titulo}}</p>
+                                </h3>
+                                <p class="text-muted">{{producto.descripcion}}</p>
+                                <div class="d-flex align-items-center">
+                                    <span class="h5 d-inline-block mb-0 text-danger">{{producto.precio}}€</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="row " *ngIf="reviews.length >= 1">
+            <!-- Product review -->
+            <div class="mb-4 pb-4 border-bottom">
+                <div class="row" *ngFor="let item of reviews | paginate: { itemsPerPage: pageSize, currentPage: p }">
+                    <div class="col-md-3 col-sm-4 mb-sm-0 mb-3">
+                        <h3 class="mb-2 fs-lg">{{ item.cliente.nombres }}{{item.cliente.apellidos}}</h3>
+                        <span class="d-block mb-2 fs-sm text-muted">{{item.createdAt | date }}</span>
+                        <div class="mt-n1 star-rating  mb-4">
+                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=1 }"></i>
+                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=2 }"></i>
+                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=3 }"></i>
+                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=4 }"></i>
+                            <i class="sr-star cxi-star-filled " [ngClass]="{'active': item.starts >=5 }"></i>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p class="mb-3">
+                            <a class="me-1 fw-bold text-decoration-none" href="#">@{{item.cliente.email}}</a>
+                            <br> {{item.review}} </p>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" *ngIf="reviews.length == 0">
+            <div class="col-12 text-center">
+                <h4>Este producto no tiene reseñas aún</h4>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer">
+        <div class="form-inline flex-nowrap d-none d-sm-flex mr-3 mr-xl-5 pt-1">
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+
+        </div>
+    </div>
+
+</div>

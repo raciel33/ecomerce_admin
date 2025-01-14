@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { v4 as uuidv4 } from 'uuid';
 import { GLOBAL } from 'src/app/services/GLOBAL';
@@ -11,11 +11,12 @@ declare var iziToast: any;
   templateUrl: './config.component.html',
   styleUrls: ['./config.component.css']
 })
-export class ConfigComponent {
+export class ConfigComponent implements OnInit {
 
   public config: any = {};
 
   public icono_categoria: string = '';
+
   public titulo_categoria: string = '';
 
   public file : File = undefined;
@@ -27,6 +28,12 @@ export class ConfigComponent {
 
     this.url = GLOBAL.url;
 
+
+  }
+
+  ngOnInit(): void {
+    //Called after the constructor, initializing input properties, and the first call to ngOnChanges.
+    //Add 'implements OnInit' to the class.
     this._adminService.obtener_config_admin().subscribe(
       (resp:any)=>{
          console.log(resp);
@@ -40,10 +47,9 @@ export class ConfigComponent {
     )
   }
 
-
   agregarCategoria(){
     if( this.icono_categoria && this.titulo_categoria){
-      console.log(uuidv4());
+     // console.log(uuidv4());
       this.config.categorias.push({
         titulo: this.titulo_categoria,
         icono: this.icono_categoria,
@@ -74,7 +80,7 @@ export class ConfigComponent {
         logo: this.file
        }
 
-       console.log(data);
+   //    console.log(data);
 
        this._adminService.actualiza_config_admin("66dd4b3812a1df431d7ffe96", data).subscribe(
         resp=>{

@@ -153,4 +153,49 @@ validarToken( allowedRoles: string[]):boolean{
 
    }
 
+   obtener_mensaje_admin( ){
+
+    return this._http.get(`${this.url}/obtener_mensaje_admin`, this.headers)
+
+   }
+   cerrar_mensaje_admin( id:any, data: any ){
+
+    return this._http.put(`${this.url}/cerrar_mensaje_admin/`+ id, data , this.headers)
+
+   }
+   //
+   borrar_mensaje_cliente( id:any){
+
+    return this._http.delete(`${this.url}/borrar_mensaje_cliente/`+ id , this.headers)
+
+   }
+   //
+   get_ventas_admin( desde:any, hasta: any){
+
+    return this._http.get(`${this.url}/get_ventas_admin/`+ desde +'/' + hasta , this.headers)
+
+   }
+   //kpi rendimiento
+   kpi_ganancias_mensuales_admin(){
+
+    return this._http.get(`${this.url}/kpi_ganancias_mensuales_admin/` , this.headers)
+
+   }
+   //
+   obtener_devoluciones( ){
+
+    return this._http.get(`${this.url}/obtener_devoluciones`, this.headers)
+
+   }
+   denegar_devolucion( id:any, data: any){
+
+    return this._http.put(`${this.url}/denegar_devolucion/`+ id, data, this.headers)
+
+   }
+   aceptar_devolucion( id:any, data: any){
+
+    return this._http.put(`${this.url}/aceptar_devolucion/` + id, data, this.headers)
+
+   }
+   //
 }

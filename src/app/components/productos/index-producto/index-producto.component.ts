@@ -44,7 +44,7 @@ export class IndexProductoComponent implements OnInit {
  listar_productos(){
       this._productosServices.listar_productos(this.desde).subscribe((resp:any)=>{
         this.productos = resp.productos;
-        //console.log(this.productos);
+        console.log(this.productos);
         this.totalProductos = resp.total
 
         //se añaden en this.array_productos los campos que se exportan a excel
@@ -59,7 +59,7 @@ export class IndexProductoComponent implements OnInit {
 
         });
 
-        console.log(this.array_productos);
+      //  console.log(this.array_productos);
         this.cargando = false
       })
     }
@@ -127,6 +127,7 @@ export class IndexProductoComponent implements OnInit {
                confirmButtonText: 'Yes, delete it!'
              }).then((result) => {
                 if (result.isConfirmed) {
+
                   this._productosServices.borrar_producto( producto._id ).subscribe(
                          (resp: any) =>{
                            this.listar_productos()

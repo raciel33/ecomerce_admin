@@ -1,0 +1,107 @@
+<app-sidebar></app-sidebar>
+
+<div class="border-bottom pt-5 mt-2 mb-5">
+    <h1 class="mt-2 mt-md-4 mb-3 pt-5">Productos</h1>
+    <div class="d-flex flex-wrap flex-md-nowrap justify-content-between">
+        <p class="text-muted">Este módulo registra descuento para este producto.</p>
+
+    </div>
+</div>
+
+<div class="card box-shadow-sm">
+    <div class="card-header">
+        <h5 style="margin-bottom: 0px;">Registro de descuento</h5>
+    </div>
+    <div class="row mb-5">
+        <div class="col-md-3" style="padding-right: 0px;">
+            <img [src]=" url + '/obtener_portada/'+ producto.portada" class="img-thumbnail rounded-0" alt="Square image">
+
+        </div>
+        <div class="col-md-8" style="padding-left: 0px;">
+            <div class="card" style="height: 100%; background: #f5eeee;">
+                <div class="card-body">
+                    <h3 class="card-product-title text-truncate mb-2">
+                        <p class="mb-3 fs-2">{{producto.titulo}}</p>
+                    </h3>
+                    <ng-container *ngIf="!producto.descuento || producto.descuento == 0 || producto.descuento == undefined">
+
+                        <div class="d-flex align-items-center">
+                            <span class="h4 d-inline-block mb-0 text-danger">{{producto.precio}}€</span>
+                        </div>
+                    </ng-container>
+
+                    <ng-container *ngIf="producto.descuento >=1 && producto.descuento != undefined">
+
+                        <div class="d-flex align-items-center">
+                            <del class="d-inline-block ms-2 ps-1 text-muted">{{producto.precio}}€</del> </div>
+                        <div class="d-flex align-items-center">
+                            <span class="badge product-badge bg-danger text-white">-{{ producto.descuento}}%</span>
+                        </div>
+                        <div class="d-flex align-items-center mt-3">
+                            <span class="h4 d-inline-block mb-0 text-danger">{{totalPagar}}€</span>
+                            <i class="cxi-arrow-right ml-2 "></i><span class="ml-2">(Precio redondeado)</span>
+
+                        </div>
+                    </ng-container>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <form #registroForm="ngForm" (ngSubmit)="registro(registroForm)">
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-lg-8">
+                    <div class="row">
+
+                        <div class="col-lg-3 form-group">
+                            <label for="">Descuento %</label>
+                            <input type="text" class="form-control" placeholder="Porcentaje del descuento" required name="titulo" [(ngModel)]="descuento.descuento">
+                        </div>
+                        <div class="col-lg-6" style="padding-left: 0px;">
+                            <div class="card" style="height: 100%; background: #f5eeee;">
+                                <div class="card-body">
+                                    <ng-container *ngIf="producto.descuento == 0 || producto.descuento == undefined">
+
+                                        <div class="d-flex align-items-center">
+                                            <span class="h2 d-inline-block mb-0 text-danger">No tiene descuento</span>
+                                        </div>
+                                    </ng-container>
+
+                                    <ng-container *ngIf="producto.descuento >=1 && producto.descuento != undefined">
+
+                                        <p class="h6 d-inline-block mb-0 ">Descuento activo</p>
+                                        <div class="d-flex align-items-center">
+
+                                            <span class="badge product-badge bg-danger text-white fs-5 mt-2">-{{ producto.descuento}}%</span>
+
+                                        </div>
+                                        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                            <button class="btn btn-outline-danger me-md-2" type="button" (click)="eliminarDesc( producto._id )">Eliminar</button>
+                                        </div>
+                                    </ng-container>
+
+
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <button *ngIf="!cargando" class="btn btn-primary mr-3" type="submit">Crear descuento</button>
+            <a class="btn btn-warning" [routerLink]="['/panel/productos']">Regresar</a>
+            <button *ngIf="cargando" type="button" class="btn btn-secondary" disabled>
+              <span class="spinner-grow spinner-grow-sm me-2" role="status" aria-hidden="true"></span>
+              Creando...
+            </button>
+        </div>
+    </form>
+</div>

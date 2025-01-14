@@ -40,7 +40,8 @@ registro(registroForm: any){
        this.cargando = false;
 
      } else {
-          if (this.descuento.descuento>=1 && this.descuento<=100) {
+
+          if (this.descuento.descuento>=1 && this.descuento.descuento<=100) {
             this.cargando = true;
                   this._descuentoService.registro_descuento_admin(this.descuento, this.file).subscribe(
                     resp=>{
@@ -128,7 +129,7 @@ fileChangeEvent( event: any){
        $('#input-portada').text(file.name)
 
        this.file = file
-       console.log(this.file);
+       //console.log(this.file);
 
      }else{
        iziToast.show({
@@ -163,6 +164,6 @@ fileChangeEvent( event: any){
      this.file = undefined
    }
 
-  console.log(this.file);
+  //console.log(this.file);
 }
 }

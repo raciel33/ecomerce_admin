@@ -26,7 +26,8 @@ export class UpdateProductoComponent  implements OnInit{
 
 
 
-  constructor(private _route: ActivatedRoute, private _productoService: ProductosService, private router: Router, private _adminService: AdminService){
+  constructor(private _route: ActivatedRoute, private _productoService: ProductosService,
+     private router: Router, private _adminService: AdminService){
     this.config = {
       height:500
    };
